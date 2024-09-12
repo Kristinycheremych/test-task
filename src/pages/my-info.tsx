@@ -21,14 +21,42 @@ import { IoIosArrowDown } from "react-icons/io";
 import { VscSettingsGear } from "react-icons/vsc";
 import { VscQuestion } from "react-icons/vsc";
 import { FaRegBell } from "react-icons/fa";
+import { useQuery } from "@apollo/client";
+import { MY_PROFILE_QUERY } from "../graphql/mutations";
+import useAuthStore from "../store/useAuthStore";
 
 const MyInfo = () => {
+  const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
+  const { clearTokens } = useAuthStore();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Вы уверены, что хотите выйти?");
+    if (confirmLogout) {
+      clearTokens();
+      window.location.href = "/";
+    }
+  };
+
+  if (loading) {
+    return <p className="text-white">Загрузка...</p>;
+  }
+
+  if (error) {
+    return (
+      <p className="text-red-500">
+        Ошибка при выборке данных профиля: {error.message}
+      </p>
+    );
+  }
+
+  const { name, avatar } = data.myProfile;
+
   return (
     <>
       {/* Menu */}
       <div>
         {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-between p-6 ">
+        <div className="flex flex-col sm:flex-row items-center justify-between pl-6 pt-6 pr-6 pb-6 sm:pb-0">
           <p className="text-lg font-semibold mb-4 sm:mb-0">HarmonyHR</p>
           <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
             <input
@@ -41,8 +69,11 @@ const MyInfo = () => {
               <VscQuestion className="cursor-pointer" />
               <FaRegBell className="cursor-pointer" />
             </div>
-            <button className="px-4 py-1 border border-gray-300 rounded-md hover:bg-blue-100 transition-colors duration-300">
-              Logout
+            <button
+              onClick={handleLogout}
+              className="px-4 py-1 border border-gray-300 rounded-md hover:bg-blue-100 transition-colors duration-300"
+            >
+              Выход
             </button>
           </div>
         </div>
@@ -74,13 +105,13 @@ const MyInfo = () => {
       <div className="bg-blue-100">
         <div className="flex flex-col md:flex-row items-center p-6 ml-0 md:ml-20 text-center md:text-left">
           <img
-            src=""
+            src={avatar}
             alt="Profile"
             className="rounded-full object-cover w-16 h-16 ml-0 md:ml-10"
           />
           <div className="ml-0 md:ml-20">
             <p className="mt-4 md:mt-0 ml-0 md:ml-10 text-xl md:text-2xl font-semibold">
-              Alexandra Kuibyshevskaya
+              {name}
             </p>
           </div>
         </div>
