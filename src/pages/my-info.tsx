@@ -17,11 +17,111 @@ import { MdOutlinePlace } from "react-icons/md";
 import { IoGlobeOutline } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
 import { MdOutlineEmail } from "react-icons/md";
+import { IoIosArrowDown } from "react-icons/io";
+import { VscSettingsGear } from "react-icons/vsc";
+import { VscQuestion } from "react-icons/vsc";
+import { FaRegBell } from "react-icons/fa";
 
 const MyInfo = () => {
   return (
     <>
-      <div className="flex flex-col md:flex-row h-screen p-6 bg-gray-100 h-auto">
+      {/* Menu */}
+      <div>
+        {/* Header Section */}
+        <div className="flex flex-col sm:flex-row items-center justify-between p-6 ">
+          <p className="text-lg font-semibold mb-4 sm:mb-0">HarmonyHR</p>
+          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-3 py-1 border border-gray-300 rounded-md w-full mr-0 sm:mr-10 sm:w-[200px] md:w-[400px]"
+            />
+            <div className="flex space-x-4">
+              <VscSettingsGear className="cursor-pointer" />
+              <VscQuestion className="cursor-pointer" />
+              <FaRegBell className="cursor-pointer" />
+            </div>
+            <button className="px-4 py-1 border border-gray-300 rounded-md hover:bg-blue-100 transition-colors duration-300">
+              Logout
+            </button>
+          </div>
+        </div>
+
+        {/* Navigation Menu */}
+        <ul className="flex flex-wrap justify-center sm:justify-start space-x-4 sm:space-x-6 sm:pl-60">
+          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Home
+          </li>
+          <li className="flex-shrink-0 bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            My Info
+          </li>
+          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            People
+          </li>
+          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Hiring
+          </li>
+          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Reports
+          </li>
+          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Files
+          </li>
+        </ul>
+      </div>
+
+      {/* Submenu */}
+      <div className="bg-blue-100">
+        <div className="flex flex-col md:flex-row items-center p-6 ml-0 md:ml-20 text-center md:text-left">
+          <img
+            src=""
+            alt="Profile"
+            className="rounded-full object-cover w-16 h-16 ml-0 md:ml-10"
+          />
+          <div className="ml-0 md:ml-20">
+            <p className="mt-4 md:mt-0 ml-0 md:ml-10 text-xl md:text-2xl font-semibold">
+              Alexandra Kuibyshevskaya
+            </p>
+          </div>
+        </div>
+        <div className="overflow-x-auto">
+          <ul className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-10 pr-6 pl-6 sm:pl-20 sm:pr-20">
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Personal
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Job
+            </li>
+            <li className="flex-shrink-0 bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Time Off
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Emergency
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Documents
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Notes
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Benefits
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Training
+            </li>
+            <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              Assets
+            </li>
+            <li className="flex items-center space-x-2 flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
+              More
+              <IoIosArrowDown />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row h-auto sm:pl-20 sm:pr-20 sm:pb-20 pl-6 pr-6 pb-6 bg-gray-100">
         {/* Sidebar */}
         <div className="w-full md:w-1/6">
           <div className="bg-white shadow-md rounded-lg p-4">
@@ -30,7 +130,7 @@ const MyInfo = () => {
                 <FiPhone className="mr-2" />
                 07911 654321
               </li>
-              <li className="flex items-center">
+              <li className="flex items-center w-auto">
                 <MdOutlineEmail className="mr-2" />
                 avd.yana@videorollnet
               </li>
@@ -107,9 +207,9 @@ const MyInfo = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 bg-white shadow-md rounded-lg p-4 md:ml-6 max-w-full">
+        <div className="flex-1 bg-white shadow-md p-4 md:ml-6 max-w-full">
           {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-gray-300 py-2">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b-2 border-gray-500 py-2">
             <div className="flex items-center space-x-2">
               <GrDocumentTime className="text-xl" />
               <h3 className="font-semibold text-gray-600 text-base md:text-lg">
@@ -121,7 +221,7 @@ const MyInfo = () => {
               <span className="text-sm text-gray-700">
                 Accrual Level Start Date 03/09-2020
               </span>
-              <button className="px-4 py-2 text-sm bg-white text-black border border-gray-300 rounded-md">
+              <button className="px-4 py-2 text-sm bg-white text-black border border-gray-300 rounded-md  hover:bg-blue-100">
                 Add Time Off Policy
               </button>
             </div>
@@ -139,9 +239,9 @@ const MyInfo = () => {
                   </div>
                 </div>
                 <p className="text-sm text-black">Days Available</p>
-                <p className="text-sm text-gray-500">1 day scheduled</p>
+                <p className="text-sm text-blue-400">1 day scheduled</p>
               </div>
-              <p className="pt-2 text-gray-500">Sick Full-Time</p>
+              <p className="pt-2 text-blue-400">Sick Full-Time</p>
             </div>
             <div className="flex-1 p-4 text-center">
               <div className="bg-gray-50 rounded-lg p-4 text-center shadow-md h-40">
@@ -154,7 +254,7 @@ const MyInfo = () => {
                 </div>
                 <p className="text-sm text-black">Days Available</p>
               </div>
-              <p className="pt-2 text-gray-500">Holiday Full-Time</p>
+              <p className="pt-2 text-blue-400">Holiday Full-Time</p>
             </div>
             <div className="flex-1 p-4 text-center">
               <div className="bg-gray-50 rounded-lg p-4 text-center shadow-md h-40">
@@ -167,7 +267,7 @@ const MyInfo = () => {
                 </div>
                 <p className="text-sm text-black">Human Used (YTD)</p>
               </div>
-              <p className="pt-2 text-gray-500">
+              <p className="pt-2 text-blue-400">
                 Comp/in Lieu Time Flexible Policy
               </p>
             </div>
@@ -175,12 +275,12 @@ const MyInfo = () => {
 
           {/* Upcoming Time Off */}
           <div className="mt-6">
-            <div className="flex items-center space-x-2 border-b-2 border-gray-300 py-2">
+            <div className="flex items-center space-x-2 border-b-2 border-gray-500 py-2">
               <IoTimeOutline className="text-xl" />
               <h3 className="font-semibold text-gray-600">Upcoming Time Off</h3>
             </div>
             <ul className="space-y-2 mt-2">
-              <li className="flex items-center border-b-2 border-gray-300 py-2">
+              <li className="flex items-center border-b-2 border-gray-500 py-2">
                 <CiMedicalCross className="text-xl mr-2" />
                 <div>
                   <span>Jan 27</span>
@@ -189,7 +289,7 @@ const MyInfo = () => {
                   </ul>
                 </div>
               </li>
-              <li className="flex items-center border-b-2 border-gray-300 py-2">
+              <li className="flex items-center border-b-2 border-gray-500 py-2">
                 <LiaPiggyBankSolid className="text-xl mr-2" />
                 <div>
                   <span>Jul 4</span>
@@ -207,8 +307,8 @@ const MyInfo = () => {
             </div>
 
             <div className="overflow-x-auto mt-4">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+              <table className="min-w-full divide-y divide-gray-100">
+                <thead className="bg-blue-100">
                   <tr>
                     <div className="flex items-center space-x-2">
                       <th className="text-left p-2 text-sm font-semibold">
@@ -230,8 +330,8 @@ const MyInfo = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
+                <tbody className="bg-white divide-y divide-blue-400">
+                  <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
                       Accrual for 23/05/2024 to 20/11/2024
@@ -240,7 +340,7 @@ const MyInfo = () => {
                     <td className="p-2 text-sm">3.00</td>
                     <td className="p-2 text-sm">3.00</td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
                       Accrual for 23/05/2024 to 20/11/2024
@@ -249,7 +349,7 @@ const MyInfo = () => {
                     <td className="p-2 text-sm"></td>
                     <td className="p-2 text-sm">3.00</td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
                       Accrual for 23/05/2024 to 20/11/2024
@@ -258,7 +358,7 @@ const MyInfo = () => {
                     <td className="p-2 text-sm">3.00</td>
                     <td className="p-2 text-sm">3.00</td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
                       Accrual for 23/05/2024 to 20/11/2024
@@ -267,7 +367,7 @@ const MyInfo = () => {
                     <td className="p-2 text-sm">3.00</td>
                     <td className="p-2 text-sm">3.00</td>
                   </tr>
-                  <tr>
+                  <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
                       Accrual for 23/05/2024 to 20/11/2024
