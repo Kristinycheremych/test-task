@@ -17,3 +17,13 @@ export const REFRESH_TOKEN_MUTATION = gql`
     }
   }
 `;
+
+export const MY_PROFILE_QUERY = gql`
+  query {
+    myProfile {
+      id
+      name
+      avatar
+    }
+  }
+`;
