@@ -30,7 +30,7 @@ const MyInfo = () => {
   const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
   const { clearTokens } = useAuthStore();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubMenuOpen, setSubMenuOpen] = useState(false);
 
   const handleSubMenuToggle = () => {
@@ -102,23 +102,30 @@ const MyInfo = () => {
         </ul>
 
         <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="px-3 py-1 border border-gray-300 rounded-md w-full sm:w-[200px] md:w-[400px]"
-          />
-          <div className="flex space-x-4 justify-between pb-6 sm:pb-0">
-            <div className="flex space-x-4 items-center ">
+          <div className="flex space-x-4 justify-between pb-6 pr-6 sm:pb-0">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="px-3 py-1 border border-gray-300 rounded-md w-full sm:w-[200px] md:w-[400px]"
+            />
+            <div className="flex space-x-4 items-center">
               <VscSettingsGear className="cursor-pointer" />
               <VscQuestion className="cursor-pointer" />
               <FaRegBell className="cursor-pointer" />
             </div>
-            <button
-              onClick={handleLogout}
-              className="px-4 py-1 border border-gray-300 rounded-md hover:bg-blue-100 transition-colors duration-300"
-            >
-              Выход
-            </button>
+            <div className="flex items-center space-x-4">
+              <img
+                src={avatar}
+                alt="Avatar"
+                className="w-8 h-8 rounded-full border border-gray-300"
+              />
+              <button
+                onClick={handleLogout}
+                className="px-4 py-1 border border-gray-300 rounded-md hover:bg-blue-100 transition-colors duration-300"
+              >
+                Выход
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -134,7 +141,7 @@ const MyInfo = () => {
           <div className="flex flex-col md:flex-row items-center justify-between w-full md:ml-20">
             <p className="mt-4 md:mt-0 text-xl md:text-2xl font-semibold">
               {name}
-            </p> 
+            </p>
             <div className="flex justify-end space-x-4 pr-6 pl-6 sm:pl-20 sm:pr-20 p-6 items-center">
               <button className="bg-blue-100 border border-gray-400 rounded-lg px-4 py-2 flex items-center space-x-2 hover:bg-gray-100 transition duration-200 h-10">
                 Request a Change
