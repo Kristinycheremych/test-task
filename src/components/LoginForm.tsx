@@ -24,7 +24,7 @@ const LoginForm = () => {
         router.push("/my-info");
       }
     } catch (err) {
-      console.error("Ошибка входа", err);
+      console.error("Ошибка входа в систему", err);
     }
   };
 
@@ -38,7 +38,10 @@ const LoginForm = () => {
         <p className="mb-6 text-sm text-gray-400">
           Enter your email below to login to your account.
         </p>
-        <label htmlFor="email" className="block mb-2 text-sm text-gray-300 font-bold">
+        <label
+          htmlFor="email"
+          className="block mb-2 text-sm text-gray-300 font-bold"
+        >
           Email
         </label>
         <input
@@ -49,7 +52,10 @@ const LoginForm = () => {
           className="w-full px-3 py-2 mb-4 text-white bg-black border border-gray-400 rounded"
           required
         />
-        <label htmlFor="email" className="block mb-2 text-sm text-gray-300 font-bold">
+        <label
+          htmlFor="email"
+          className="block mb-2 text-sm text-gray-300 font-bold"
+        >
           Password
         </label>
         <input

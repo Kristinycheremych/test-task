@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { CiMedicalCross } from "react-icons/ci";
 import { LiaPiggyBankSolid } from "react-icons/lia";
 import { GoHistory } from "react-icons/go";
@@ -24,10 +24,22 @@ import { FaRegBell } from "react-icons/fa";
 import { useQuery } from "@apollo/client";
 import { MY_PROFILE_QUERY } from "../graphql/mutations";
 import useAuthStore from "../store/useAuthStore";
+import { IoMdMenu } from "react-icons/io";
 
 const MyInfo = () => {
   const { data, loading, error } = useQuery(MY_PROFILE_QUERY);
   const { clearTokens } = useAuthStore();
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isSubMenuOpen, setSubMenuOpen] = useState(false);
+
+  const handleSubMenuToggle = () => {
+    setSubMenuOpen(!isSubMenuOpen);
+  };
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("Вы уверены, что хотите выйти?");
@@ -53,18 +65,50 @@ const MyInfo = () => {
 
   return (
     <>
-      {/* Menu */}
-      <div>
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pl-6 pt-6 pr-6 pb-6 sm:pb-0">
-          <p className="text-lg font-semibold mb-4 sm:mb-0">HarmonyHR</p>
-          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="px-3 py-1 border border-gray-300 rounded-md w-full mr-0 sm:mr-10 sm:w-[200px] md:w-[400px]"
-            />
-            <div className="flex space-x-4">
+      {/* Header Section */}
+      <div className="flex flex-col sm:flex-row justify-between pl-6 pt-6 pr-6 pb-0">
+        <div className="flex justify-between items-center mb-6">
+          <p className="text-lg font-semibold sm:mb-0">HarmonyHR</p>
+          {/* Иконка гамбургер для мобильных экранов */}
+          <IoMdMenu
+            className="block sm:hidden cursor-pointer text-2xl"
+            onClick={handleMenuToggle}
+          />
+        </div>
+        {/* Навигационное меню */}
+        <ul
+          className={`flex-col sm:flex-row items-center space-x-0 sm:space-x-4  sm:pl-4 ${
+            isMenuOpen ? "flex" : "hidden"
+          } sm:flex`} // Скрытие/показ меню в зависимости от состояния
+        >
+          <li className="hover:bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Home
+          </li>
+          <li className="bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            My Info
+          </li>
+          <li className="hover:bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            People
+          </li>
+          <li className="hover:bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Hiring
+          </li>
+          <li className="hover:bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Reports
+          </li>
+          <li className="hover:bg-blue-100 transition-colors duration-200 p-4 cursor-pointer rounded-tl-lg rounded-tr-lg">
+            Files
+          </li>
+        </ul>
+
+        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="px-3 py-1 border border-gray-300 rounded-md w-full sm:w-[200px] md:w-[400px]"
+          />
+          <div className="flex space-x-4 justify-between pb-6 sm:pb-0">
+            <div className="flex space-x-4 items-center ">
               <VscSettingsGear className="cursor-pointer" />
               <VscQuestion className="cursor-pointer" />
               <FaRegBell className="cursor-pointer" />
@@ -77,46 +121,43 @@ const MyInfo = () => {
             </button>
           </div>
         </div>
-
-        {/* Navigation Menu */}
-        <ul className="flex flex-wrap justify-center sm:justify-start space-x-4 sm:space-x-6 sm:pl-60">
-          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            Home
-          </li>
-          <li className="flex-shrink-0 bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            My Info
-          </li>
-          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            People
-          </li>
-          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            Hiring
-          </li>
-          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            Reports
-          </li>
-          <li className="flex-shrink-0 hover:bg-blue-100 transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
-            Files
-          </li>
-        </ul>
       </div>
 
       {/* Submenu */}
-      <div className="bg-blue-100">
-        <div className="flex flex-col md:flex-row items-center p-6 ml-0 md:ml-20 text-center md:text-left">
+      <div className="bg-blue-100 ">
+        <div className="flex flex-col md:flex-row items-center ml-0 md:ml-20 text-center md:text-left">
           <img
             src={avatar}
             alt="Profile"
-            className="rounded-full object-cover w-16 h-16 ml-0 md:ml-10"
+            className="rounded-full object-cover w-32 h-32 ml-0 md:ml-10 mt-10"
           />
-          <div className="ml-0 md:ml-20">
-            <p className="mt-4 md:mt-0 ml-0 md:ml-10 text-xl md:text-2xl font-semibold">
+          <div className="flex flex-col md:flex-row items-center justify-between w-full md:ml-20">
+            <p className="mt-4 md:mt-0 text-xl md:text-2xl font-semibold">
               {name}
-            </p>
+            </p> 
+            <div className="flex justify-end space-x-4 pr-6 pl-6 sm:pl-20 sm:pr-20 p-6 items-center">
+              <button className="bg-blue-100 border border-gray-400 rounded-lg px-4 py-2 flex items-center space-x-2 hover:bg-gray-100 transition duration-200 h-10">
+                Request a Change
+                <IoIosArrowDown />
+              </button>
+              <button className="bg-blue-100 border border-gray-400 rounded-lg px-4 py-2 flex items-center space-x-2 hover:bg-gray-100 transition duration-200 h-10">
+                <VscSettingsGear />
+                <IoIosArrowDown />
+              </button>
+              <IoMdMenu
+                className="block sm:hidden cursor-pointer text-2xl"
+                onClick={handleSubMenuToggle}
+              />
+            </div>
           </div>
         </div>
+
         <div className="overflow-x-auto">
-          <ul className="flex flex-wrap justify-center md:justify-end space-x-4 md:space-x-10 pr-6 pl-6 sm:pl-20 sm:pr-20">
+          <ul
+            className={`flex-wrap justify-center md:justify-end md:space-x-10 pr-6 pl-6 sm:pr-20 flex-col sm:flex-row items-center  sm:pl-4 ${
+              isSubMenuOpen ? "flex" : "hidden"
+            } sm:flex`}
+          >
             <li className="flex-shrink-0 hover:bg-white transition-colors duration-200 p-2 cursor-pointer rounded-tl-lg rounded-tr-lg">
               Personal
             </li>
@@ -260,7 +301,7 @@ const MyInfo = () => {
 
           {/* Time Off Summary */}
           <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mt-6">
-            <div className="flex-1 p-4 text-center">
+            <div className="flex-1 p-0 sm:p-4 text-center">
               <div className="bg-gray-50 rounded-lg p-4 text-center shadow-md h-40">
                 <h2 className="text-lg font-semibold">Sick</h2>
                 <div className="flex items-center justify-center space-x-2 p-2">
@@ -274,7 +315,7 @@ const MyInfo = () => {
               </div>
               <p className="pt-2 text-blue-400">Sick Full-Time</p>
             </div>
-            <div className="flex-1 p-4 text-center">
+            <div className="flex-1 p-0 sm:p-4 text-center">
               <div className="bg-gray-50 rounded-lg p-4 text-center shadow-md h-40">
                 <h2 className="text-lg font-semibold">Annual Leave</h2>
                 <div className="flex items-center justify-center space-x-2 p-2">
@@ -287,7 +328,7 @@ const MyInfo = () => {
               </div>
               <p className="pt-2 text-blue-400">Holiday Full-Time</p>
             </div>
-            <div className="flex-1 p-4 text-center">
+            <div className="flex-1 p-0 sm:p-4 text-center">
               <div className="bg-gray-50 rounded-lg p-4 text-center shadow-md h-40">
                 <h2 className="text-lg font-semibold">Comp/In Lieu Time</h2>
                 <div className="flex items-center justify-center space-x-2 p-2">
@@ -361,7 +402,7 @@ const MyInfo = () => {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-blue-400">
+                <tbody className="bg-white divide-y divide-gray-700">
                   <tr className="hover:bg-blue-100 cursor-pointer">
                     <td className="p-2 text-sm">23/05/2024</td>
                     <td className="p-2 text-sm">
